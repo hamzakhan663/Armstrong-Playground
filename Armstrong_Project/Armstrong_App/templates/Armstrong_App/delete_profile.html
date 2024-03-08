@@ -1,5 +1,5 @@
 {% if profile %}
-<h2>{{profile.user.username}} Profile</h2>
+<h2>{{profile.user.username}}'s Profile</h2>
 
 <form method="post" action="{% url 'delete_profile' %}">
     {% csrf_token %}

@@ -16,9 +16,10 @@ def register(request):
         if form.is_valid():
             form.save()
             return redirect('home')
+    
     else:
         form = RegisterForm()
-        return render(request, 'Armstrong_App/register.html',{'form': form})
+    return render(request, 'Armstrong_App/register.html',{'form': form})
 
 
 def update_profile(request):
