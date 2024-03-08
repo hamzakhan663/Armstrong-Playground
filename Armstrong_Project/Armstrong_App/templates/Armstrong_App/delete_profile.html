@@ -1,0 +1,11 @@
+{% if profile %}
+<h2>{{profile.user.username}} Profile</h2>
+
+<form method="post" action="{% url 'delete_profile' %}">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+{% else %}
+    <h2> No Profile</h2>
+{% endif %}
+    

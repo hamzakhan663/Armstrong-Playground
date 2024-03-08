@@ -1,0 +1,11 @@
+{% if profile %}
+<h2>{{profile.user.username}} Profile</h2>
+<form method="post" action="{% url 'update_profile' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+{% else %}
+    <h2> No Profile</h2>
+{% endif %}
+    
