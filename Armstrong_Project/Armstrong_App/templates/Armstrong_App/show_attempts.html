@@ -1,7 +1,9 @@
 {% block content %}
   <h2>{{user.username}}'s Attempts</h2>
 
+  
   {% if user_attempts %}
+  <p>Total Attempts Made: {{ user_attempts|length}}</p>
     <table>
       <thead>
         <tr>

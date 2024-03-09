@@ -4,8 +4,7 @@ from django.contrib.auth.models import User
 from .models import ArmstrongUserProfile, UserAttempt
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-from django.contrib import messages
+from django.db.models import Count
 
 
 # Create your views here.
@@ -120,7 +119,7 @@ def delete_profile(request):
         return render(request, 'Armstrong_App/delete_profile.html', context)
 
 
-
+@login_required
 def search(request):
     if request.method == 'POST':
         input_type = request.POST.get('inputType')
@@ -172,6 +171,7 @@ def is_armstrong_number(number):
 @login_required
 def show_attempts(request):
     user_attempts = UserAttempt.objects.filter(user=request.user).order_by('-timestamp')
+       
     return render(request, 'Armstrong_App/show_attempts.html', {'user_attempts': user_attempts})
 
 
