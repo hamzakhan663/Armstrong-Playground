@@ -1,0 +1,10 @@
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}! <a href="{% url 'logout' %}">Logout</a></p>
+{% else %}
+    {# Display login form or other content for anonymous users #}
+{% endif %}
+
+<form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit">Logout</button>
+</form>
