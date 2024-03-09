@@ -1,0 +1,34 @@
+{% block content %}
+  <h2>{{user.username}}'s Attempts</h2>
+
+  {% if user_attempts %}
+    <table>
+      <thead>
+        <tr>
+          {% comment %} <th>Timestamp</th> {% endcomment %}
+          <th>Attempt Type</th>
+          <th></th>
+          <th></th>
+          <th></th><th></th><th></th><th></th><th></th>
+          <th>Attempt Value</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for attempt in user_attempts %}
+          <tr>
+            {% comment %} <td>{{ attempt.timestamp }}</td> {% endcomment %}
+            <td>{{ attempt.attempt_type }}</td>
+            <td></td>
+            <td></td>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td>{{ attempt.attempt_value }}</td>
+            <td>{{ attempt.result }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No attempts recorded.</p>
+  {% endif %}
+{% endblock %}

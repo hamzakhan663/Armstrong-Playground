@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import ArmstrongUserProfileForm, RegisterForm, LoginForm
 from django.contrib.auth.models import User
-from .models import ArmstrongUserProfile
+from .models import ArmstrongUserProfile, UserAttempt
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
@@ -134,17 +134,29 @@ def search(request):
             result = {
                 'armstrong_numbers': armstrong_numbers,
                 'total_count': len(armstrong_numbers),
-                'input_type': input_type
+                'input_type': input_type,
+                'attempt_value': f'{min_number}-{max_number}',
+                'formatted_result': f'Found {len(armstrong_numbers)} Armstrong numbers in the range {min_number}-{max_number}.',
             }
         elif input_type == 'single':
             single_number = int(request.POST.get('singleNumber', 0))
 
             result = {
+                'single_number': single_number,
                 'is_armstrong': is_armstrong_number(single_number),
-                'input_type': input_type
+                'input_type': input_type,
+                'attempt_value': str(single_number),
+                'formatted_result': f'The number {single_number} {"is" if is_armstrong_number(single_number) else "is not"} an Armstrong number.'
             }
         else:
             result = {'error': 'Invalid input type'}
+            
+        UserAttempt.objects.create(
+            user=request.user,  # Assuming you have a user associated with the request
+            attempt_type=input_type,
+            attempt_value=result['attempt_value'],
+            result=result['formatted_result'],
+        )
 
         return render(request, 'Armstrong_App/search.html', {'result': result})
 
@@ -157,10 +169,10 @@ def is_armstrong_number(number):
     armstrong_sum = sum(int(digit) ** n for digit in num_str)
     return armstrong_sum == number
 
-
-
-
-
+@login_required
+def show_attempts(request):
+    user_attempts = UserAttempt.objects.filter(user=request.user).order_by('-timestamp')
+    return render(request, 'Armstrong_App/show_attempts.html', {'user_attempts': user_attempts})
 
 
 

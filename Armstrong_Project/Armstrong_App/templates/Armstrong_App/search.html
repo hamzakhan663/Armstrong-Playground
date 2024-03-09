@@ -19,7 +19,9 @@
 
     <button type="submit">Search</button>
     <input type="reset" value="Clear" onclick="clearResults()">
+    <a href="{% url 'show_attempts' %}"><button type="button">Show Attempts</button></a>
   </form>
+  
 
   <div id="resultContainer">
   {% if result %}
@@ -54,4 +56,5 @@
     }
   </script>
 
+  <a href="{% url 'home' %}"><button type="button">Go Back to Home</button></a>
 {% endblock %}
