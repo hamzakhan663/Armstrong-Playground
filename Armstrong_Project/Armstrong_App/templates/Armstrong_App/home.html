@@ -1,11 +1,1 @@
-{% if user.is_authenticated %}
-    <a href="{% url 'create_profile' %}">Create Profile</a>
-    <br><br><br>
-    <a href="{% url 'update_profile' %}">Update Profile</a>
-    <br><br><br>
-    <a href="{% url 'delete_profile' %}">Delete Profile</a>
-    <br><br><br>
-    <p>{{ user.username }} is logged in</p>
-{% else %}
-    <p>Welcome! Please <a href="{% url 'login' %}">login</a> or <a href="{% url 'register' %}">register</a>.</p>
-{% endif %}
+{% include 'Armstrong_App/landing_page.html' %}

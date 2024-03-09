@@ -1,0 +1,32 @@
+body {
+    background-color: #f8f9fa;
+    /* padding-top: 56px; Adjust based on your navbar height */
+}
+
+.landing {
+    background-image: url('../images/Maths.avif');
+    background-size: cover;
+    background-position: center;
+    color: black;  
+    text-align: center;
+    padding: 100px 0;  
+}
+
+.landing h1,
+.landing p {
+font-weight: 300;
+}
+
+/* #dropdown-content{
+    width: 100%;
+    position: relative;
+}    */
+
+.btn-custom {
+    background-color: #B997B7;
+    color: #fff;
+}
+.btn-custom:hover {
+    background: #F2AAb8;
+    color: black
+}

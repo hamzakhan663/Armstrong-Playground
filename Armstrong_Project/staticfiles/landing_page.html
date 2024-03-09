@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to The Armstrong App</title>
+    <!-- Link to Bootstrap CSS (you can replace this with the CDN link) -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            padding-top: 56px; /* Adjust based on your navbar height */
+        }
+
+        .landing {
+            text-align: center;
+            padding: 80px;
+        }
+
+        .btn-custom {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">The Armstrong App</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Settings</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Landing Page -->
+    <div class="landing">
+        <img src="Maths.avif" alt="Sample Image" class="img-fluid mb-4" />
+        <h1 class="display-4">WELCOME TO THE ARMSTRONG APP</h1>
+        <p class="lead">Your go-to platform for amazing experiences.</p>
+        <a href="{% url 'register' %}" class="btn btn-custom btn-lg">Register</a>
+        <a href="{% url 'login' %}" class="btn btn-custom btn-lg ml-2">Login</a>
+    </div>
+
+    <!-- Link to Bootstrap JS and jQuery (you can replace these with the CDN links) -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
