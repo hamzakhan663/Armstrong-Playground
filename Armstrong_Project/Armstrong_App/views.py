@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from .models import ArmstrongUserProfile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+
 
 # Create your views here.
 
@@ -112,6 +114,108 @@ def delete_profile(request):
     else:
         context = {'profile': profile}
         return render(request, 'Armstrong_App/delete_profile.html', context)
+
+
+
+def search(request):
+    if request.method == 'POST':
+        input_type = request.POST.get('inputType')
+
+        if input_type == 'range':
+            min_number = int(request.POST.get('minNumber', 0))
+            max_number = int(request.POST.get('maxNumber', 0))
+
+            armstrong_numbers = [n for n in range(min_number, max_number + 1) if is_armstrong_number(n)]
+
+            result = {
+                'armstrong_numbers': armstrong_numbers,
+                'total_count': len(armstrong_numbers),
+                'input_type': input_type
+            }
+        elif input_type == 'single':
+            single_number = int(request.POST.get('singleNumber', 0))
+
+            result = {
+                'single_number': single_number,
+                'is_armstrong': is_armstrong_number(single_number),
+                'input_type': input_type
+            }
+        else:
+            result = {'error': 'Invalid input type'}
+
+        return render(request, 'Armstrong_App/search.html', {'result': result})
+
+    return render(request, 'Armstrong_App/search.html', {'result': None})
+
+
+def is_armstrong_number(number):
+    num_str = str(number)
+    n = len(num_str)
+    armstrong_sum = sum(int(digit) ** n for digit in num_str)
+    return armstrong_sum == number
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

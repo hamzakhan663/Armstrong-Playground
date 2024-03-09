@@ -1,0 +1,46 @@
+{% block content %}
+  <h2>Armstrong Number Search</h2>
+
+  <form method="post" action="{% url 'search' %}">
+    {% csrf_token %}
+    
+    <label for="rangeInput">Search Range:</label>
+    <input type="radio" id="rangeInput" name="inputType" value="range" checked>
+    <input type="number" id="minNumber" name="minNumber" placeholder="Min">
+    <input type="number" id="maxNumber" name="maxNumber" placeholder="Max">
+
+    <br><br><br>
+
+    <label for="singleInput">Check Single Number:</label>
+    <input type="radio" id="singleInput" name="inputType" value="single">
+    <input type="number" id="singleNumber" name="singleNumber" placeholder="Enter a Number">
+
+    <br><br>
+
+    <button type="submit">Search</button>
+  </form>
+
+  {% if result %}
+    {% if result.input_type == 'range' %}
+      <h3>Armstrong Numbers in the Range:</h3>
+      {% if result.armstrong_numbers %}
+        <ul>
+          {% for armstrong_number in result.armstrong_numbers %}
+            <li>{{ armstrong_number }}</li>
+          {% endfor %}
+        </ul>
+        <p>Total Count: {{ result.total_count }}</p>
+      {% else %}
+        <p>No Armstrong numbers found in the specified range.</p>
+      {% endif %}
+    {% elif result.input_type == 'single' %}
+      <h3>Result for Single Number:</h3>
+      {% if result.is_armstrong %}
+        <p>{{ result.single_number }} is an Armstrong Number.</p>
+      {% else %}
+        <p>{{ result.single_number }} is not an Armstrong Number.</p>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+{% endblock %}
