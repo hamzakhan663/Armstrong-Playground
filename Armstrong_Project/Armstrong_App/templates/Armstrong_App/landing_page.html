@@ -54,9 +54,13 @@
     <!-- Landing Page -->
     <div class="landing">
         <h1 class="display-4">WELCOME TO THE ARMSTRONG APP</h1>
-        <p class="lead">Your go-to platform for amazing experiences.</p>
+        <p class="lead">Your go-to platform for amazing math experiences.</p>
+        {% if user.is_authenticated %}
+        <a href="{% url 'search' %}" class="btn btn-custom btn-lg">Use App Features</a>
+        {% else %}
         <a href="{% url 'register' %}" class="btn btn-custom btn-lg">Register</a>
         <a href="{% url 'login' %}" class="btn btn-custom btn-lg ml-2">Login</a>
+        {% endif %}
     </div>
 
     <!-- Link to Bootstrap JS and jQuery (you can replace these with the CDN links) -->

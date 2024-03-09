@@ -5,6 +5,7 @@ from .models import ArmstrongUserProfile
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+from django.contrib import messages
 
 
 # Create your views here.
@@ -35,6 +36,9 @@ def user_login(request):
             if user != None:
                 login(request, user)
                 return redirect('home')
+            else:
+                raise ValueError("Invalid username or password")
+                
                 
     else:
         form = LoginForm()
@@ -56,7 +60,7 @@ def update_profile(request):
         profile = None
     
     if request.method == 'POST':
-        form = ArmstrongUserProfileForm(request.POST, instance=profile)
+        form = ArmstrongUserProfileForm(request.POST)
         
     else:
         form = ArmstrongUserProfileForm()
@@ -80,7 +84,7 @@ def create_profile(request):
 
     if request.method == 'POST':
         print("========")
-        form = ArmstrongUserProfileForm(request.POST, instance=profile)
+        form = ArmstrongUserProfileForm(request.POST)
         if form.is_valid():
             print("======+++++++++==")
             name = request.POST.get('name', '')
@@ -136,7 +140,6 @@ def search(request):
             single_number = int(request.POST.get('singleNumber', 0))
 
             result = {
-                'single_number': single_number,
                 'is_armstrong': is_armstrong_number(single_number),
                 'input_type': input_type
             }

@@ -1,7 +1,7 @@
 {% block content %}
   <h2>Armstrong Number Search</h2>
 
-  <form method="post" action="{% url 'search' %}">
+  <form method="post" action="{% url 'search' %}" id="armstrongSearchForm">
     {% csrf_token %}
     
     <label for="rangeInput">Search Range:</label>
@@ -18,8 +18,10 @@
     <br><br>
 
     <button type="submit">Search</button>
+    <input type="reset" value="Clear" onclick="clearResults()">
   </form>
 
+  <div id="resultContainer">
   {% if result %}
     {% if result.input_type == 'range' %}
       <h3>Armstrong Numbers in the Range:</h3>
@@ -36,11 +38,20 @@
     {% elif result.input_type == 'single' %}
       <h3>Result for Single Number:</h3>
       {% if result.is_armstrong %}
-        <p>{{ result.single_number }} is an Armstrong Number.</p>
+        <p> It is an Armstrong Number</p>
       {% else %}
-        <p>{{ result.single_number }} is not an Armstrong Number.</p>
+        <p>Not an Armstrong Number</p>
       {% endif %}
     {% endif %}
   {% endif %}
+    </div>
+
+
+  <script>
+    function clearResults() {
+      document.getElementById("armstrongSearchForm").reset();
+      document.getElementById("resultContainer").style.display = "none";
+    }
+  </script>
 
 {% endblock %}
