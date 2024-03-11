@@ -30,3 +30,69 @@ font-weight: 300;
     background: #F2AAb8;
     color: black
 }
+
+
+.search-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .top {
+    color: #333;
+  }
+
+  form {
+    margin-top: 20px;
+  }
+
+  input[type="number"],
+  input[type="radio"],
+  button,
+  input[type="reset"],
+  a {
+    margin-bottom: 10px;
+  }
+
+  .search-btn,
+  .clear-btn,
+  .attempts-btn,
+  .back-btn {
+    background-color: #B997B7;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .search-btn:hover{
+    background: #F2AAb8;
+    color: black;
+    transition: background 0.3s ease-in-out;
+  }
+  .clear-btn:hover{
+    background: #F2AAb8;
+    color: black;
+    transition: background 0.3s ease-in-out;
+  }
+  .attempts-btn:hover{
+    background: #F2AAb8;
+    color: black;
+    transition: background 0.3s ease-in-out;
+  }
+  .back-btn:hover {
+    background: #F2AAb8;
+    color: black;
+    transition: background 0.3s ease-in-out;
+  }
+  .result-container {
+    margin-top: 20px;
+  }
+.wrapped{
+text-align: center;
+margin-top: 20px;
+}

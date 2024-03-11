@@ -127,6 +127,9 @@ def search(request):
         if input_type == 'range':
             min_number = int(request.POST.get('minNumber', 0))
             max_number = int(request.POST.get('maxNumber', 0))
+            
+            if not (min_number and max_number):
+                raise ValueError("Please provide both minimum and maximum numbers.")
 
             armstrong_numbers = [n for n in range(min_number, max_number + 1) if is_armstrong_number(n)]
 
@@ -139,6 +142,9 @@ def search(request):
             }
         elif input_type == 'single':
             single_number = int(request.POST.get('singleNumber', 0))
+            
+            if not (single_number):
+                raise ValueError("Please provide a number.")
 
             result = {
                 'single_number': single_number,

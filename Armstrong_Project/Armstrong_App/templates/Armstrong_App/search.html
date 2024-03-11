@@ -1,53 +1,56 @@
 {% block content %}
-  <h2>Armstrong Number Search</h2>
+{% load static%}
+<link rel="stylesheet" type="text/css" href="{% static 'Armstrong_App/css/styles.css' %}">
 
-  <form method="post" action="{% url 'search' %}" id="armstrongSearchForm">
-    {% csrf_token %}
+  <div class="search-container">
+    <h2 class="top">Armstrong Number Search</h2>
+
+    <form method="post" action="{% url 'search' %}" id="armstrongSearchForm">
+      {% csrf_token %}
+      
+      <label for="rangeInput">Search Range:</label>
+      <input type="radio" id="rangeInput" name="inputType" value="range" checked>
+      <input type="number" id="minNumber" name="minNumber" placeholder="Min">
+      <input type="number" id="maxNumber" name="maxNumber" placeholder="Max">
+
+      <br><br>
+
+      <label for="singleInput">Check Single Number:</label>
+      <input type="radio" id="singleInput" name="inputType" value="single">
+      <input type="number" id="singleNumber" name="singleNumber" placeholder="Enter a Number">
+
+      <br><br>
+
+      <button type="submit" class="search-btn">Search</button>
+      <input type="reset" value="Clear" onclick="clearResults()" class="clear-btn">
+      <a href="{% url 'show_attempts' %}"><button type="button" class="attempts-btn">Show Attempts</button></a>
+    </form>
     
-    <label for="rangeInput">Search Range:</label>
-    <input type="radio" id="rangeInput" name="inputType" value="range" checked>
-    <input type="number" id="minNumber" name="minNumber" placeholder="Min">
-    <input type="number" id="maxNumber" name="maxNumber" placeholder="Max">
-
-    <br><br><br>
-
-    <label for="singleInput">Check Single Number:</label>
-    <input type="radio" id="singleInput" name="inputType" value="single">
-    <input type="number" id="singleNumber" name="singleNumber" placeholder="Enter a Number">
-
-    <br><br>
-
-    <button type="submit">Search</button>
-    <input type="reset" value="Clear" onclick="clearResults()">
-    <a href="{% url 'show_attempts' %}"><button type="button">Show Attempts</button></a>
-  </form>
-  
-
-  <div id="resultContainer">
-  {% if result %}
-    {% if result.input_type == 'range' %}
-      <h3>Armstrong Numbers in the Range:</h3>
-      {% if result.armstrong_numbers %}
-        <ul>
-          {% for armstrong_number in result.armstrong_numbers %}
-            <li>{{ armstrong_number }}</li>
-          {% endfor %}
-        </ul>
-        <p>Total Count: {{ result.total_count }}</p>
-      {% else %}
-        <p>No Armstrong numbers found in the specified range.</p>
+    <div id="resultContainer">
+      {% if result %}
+        {% if result.input_type == 'range' %}
+          <h3>Armstrong Numbers in the Range:</h3>
+          {% if result.armstrong_numbers %}
+            <ul>
+              {% for armstrong_number in result.armstrong_numbers %}
+                <li>{{ armstrong_number }}</li>
+              {% endfor %}
+            </ul>
+            <p>Total Count: {{ result.total_count }}</p>
+          {% else %}
+            <p>No Armstrong numbers found in the specified range.</p>
+          {% endif %}
+        {% elif result.input_type == 'single' %}
+          <h3>Result for Single Number:</h3>
+          {% if result.is_armstrong %}
+            <p> It is an Armstrong Number</p>
+          {% else %}
+            <p>Not an Armstrong Number</p>
+          {% endif %}
+        {% endif %}
       {% endif %}
-    {% elif result.input_type == 'single' %}
-      <h3>Result for Single Number:</h3>
-      {% if result.is_armstrong %}
-        <p> It is an Armstrong Number</p>
-      {% else %}
-        <p>Not an Armstrong Number</p>
-      {% endif %}
-    {% endif %}
-  {% endif %}
     </div>
-
+  </div>
 
   <script>
     function clearResults() {
@@ -55,6 +58,7 @@
       document.getElementById("resultContainer").style.display = "none";
     }
   </script>
-
-  <a href="{% url 'home' %}"><button type="button">Go Back to Home</button></a>
+<div class="wrapped">
+  <a href="{% url 'home' %}"><button type="button" class="back-btn">Go Back to Home</button></a>
+</div>
 {% endblock %}
