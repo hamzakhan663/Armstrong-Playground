@@ -1,17 +1,52 @@
-{% block content %}
-  <h2>{{user.username}}'s Attempts</h2>
+{% load static %}
 
+
+{% block content %}
+  <style>
+    .centered-container {
+      text-align: center;
+      padding-bottom: 10px;
+      background-color: #f2f2f2;
+      padding-top: 2px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 auto; /* Center the table */
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: center;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    /* Style for alternate row colors */
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+
+  <div class="centered-container">
+    <h2>{{user.username}}'s Attempts</h2>
+    {% if user_attempts %}
+      <p>Total Attempts Made: {{ user_attempts|length}}</p>
+    {% else %}
+      <p>No attempts recorded.</p>
+    {% endif %}
+  </div>
   
   {% if user_attempts %}
-  <p>Total Attempts Made: {{ user_attempts|length}}</p>
     <table>
       <thead>
         <tr>
-          {% comment %} <th>Timestamp</th> {% endcomment %}
           <th>Attempt Type</th>
-          <th></th>
-          <th></th>
-          <th></th><th></th><th></th><th></th><th></th>
           <th>Attempt Value</th>
           <th>Result</th>
         </tr>
@@ -19,18 +54,12 @@
       <tbody>
         {% for attempt in user_attempts %}
           <tr>
-            {% comment %} <td>{{ attempt.timestamp }}</td> {% endcomment %}
             <td>{{ attempt.attempt_type }}</td>
-            <td></td>
-            <td></td>
-            <td></td><td></td><td></td><td></td><td></td>
             <td>{{ attempt.attempt_value }}</td>
             <td>{{ attempt.result }}</td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
-  {% else %}
-    <p>No attempts recorded.</p>
   {% endif %}
 {% endblock %}
