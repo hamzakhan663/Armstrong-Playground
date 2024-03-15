@@ -4,67 +4,134 @@
 
 <html lang="en">
 <head>
+  {% comment %} Css Styles for Landing Page {% endcomment %}
+  <style>
+  .col-lg-6{
+    text-align: center;
+
+    }
+
+    #first_image {
+      margin:100px 0 0 40px;
+      max-width: 100%; /* Ensure the image is responsive */
+  }
+
+  .image-container {
+    border: 1px solid #ddd; /* Add border */
+    padding: 10px; /* Add padding */
+    margin-bottom: 20px; /* Add margin */
+    text-align: center; /* Center image */
+    height: 350px;
+    width: 350px;
+  }
+
+.image-container img {
+    width: 100%; /* Ensure image fills container horizontally */
+    height: 100%; /* Ensure image fills container vertically */
+    object-fit: cover;
+}
+
+.section {
+  background-color: #f8f9fa; /* Background color for the entire section */
+  
+}
+
+  
+  </style>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to The Armstrong App</title>
-    <!-- Link to Bootstrap CSS (you can replace this with the CDN link) -->
+    <!-- Link to Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'Armstrong_App/css/styles.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-    <!-- Navbar -->
-    
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Armstrong App</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <!-- Other navbar items -->
-  
-        <!-- Settings dropdown -->
-        {% if user.is_authenticated %}
-        <li class="nav-item dropdown" id="dropdown-content">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Settings
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="{% url 'create_profile' %}">Create Profile</a>
-            <a class="dropdown-item" href="{% url 'update_profile' %}">Update Profile</a>
-            <a class="dropdown-item" href="{% url 'delete_profile' %}">Delete Profile</a>
-            <div class="dropdown-divider"></div>
-            <p class="dropdown-item">{{ user.username }} is logged in</p><br>
-            <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-          </div>
-        </li>
-        {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}">Login</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'register' %}">Register</a>
-        </li>
-      {% endif %}
-      </ul>
-    </div>
-  </nav>
-  
+  {% comment %} Navbar File Inclusion {% endcomment %}
+  {% include 'Armstrong_App/navbar.html' %}
 
-    <!-- Landing Page -->
+
+    <!-- Code for the Landing Page-->
     <div class="landing">
         <h1 class="display-4">WELCOME TO THE ARMSTRONG APP</h1>
         <p class="lead">Your go-to platform for amazing math experiences.</p>
         {% if user.is_authenticated %}
+        {% comment %} Link to access app features if user is logged in {% endcomment %}
         <a href="{% url 'search' %}" class="btn btn-custom btn-lg">Use App Features</a>
         {% else %}
+        {% comment %} Links to Register and Login links if user is not logged in {% endcomment %}
         <a href="{% url 'register' %}" class="btn btn-custom btn-lg">Register</a>
         <a href="{% url 'login' %}" class="btn btn-custom btn-lg ml-2">Login</a>
         {% endif %}
     </div>
 
-    <!-- Link to Bootstrap JS and jQuery (you can replace these with the CDN links) -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    {% comment %} Code for the Description Section of the Landing Page {% endcomment %}
+    <div class="container mt-5">
+      <div class="row">
+  
+        
+          <div class="col-lg-6">
+              <h2>What even are Armstrong Numbers?</h2>
+              {% comment %} Descriptive messages about Armstrong Numbers {% endcomment %}
+              <p>Armstrong numbers, also known as narcissistic numbers or plenary numbers, are a special type of number in mathematics. These numbers are named after Michael F. Armstrong, who first introduced them in a letter to Dorrie in 1969. An Armstrong number is a number that is equal to the sum of its own digits each raised to the power of the number of digits in the number itself. For example, 153 is an Armstrong number because 1^3 + 5^3 + 3^3 = 153.</p>
+              <p>Armstrong numbers are relatively rare and exist only for certain combinations of digits.
+                The number of Armstrong numbers is finite.
+                Armstrong numbers are self-descriptive in the sense that they exhibit a unique property related to their digits.
+                Armstrong numbers are used in recreational mathematics and programming exercises as a challenge to find them efficiently.<p>
+              <p>Armstrong numbers are fascinating mathematical entities that demonstrate interesting properties related to the digits comprising them. Despite being relatively rare, they are widely studied and used in various mathematical contexts, making them an intriguing topic for exploration.</p>
+          </div>
+          <div class="col-lg-6">
+              <img src="{% static 'Armstrong_App/images/armstrong.jpg' %}" class="img-fluid" alt="Armstrong Numbers" id = "first_image">
+          </div>
+        </div>
+      </div>
+  
+
+
+<!-- Code for the Images Section -->
+<div class="section">
+  <div class="container mt-5">
+    <div class="row bg-light p-3">
+      <div class="col-lg-4">
+          <div class="image-container">
+              <img src="{% static 'Armstrong_App/images/mathss.jpg' %}" class="img-fluid" alt="Image 1">
+          </div>
+      </div>
+      <div class="col-lg-4">
+          <div class="image-container">
+              <img src="{% static 'Armstrong_App/images/mathsss.jpg' %}" class="img-fluid" alt="Image 2">
+          </div>
+      </div>
+      <div class="col-lg-4">
+          <div class="image-container">
+              <img src="{% static 'Armstrong_App/images/mathssss.jpg' %}" class="img-fluid" alt="Image 3">
+          </div>
+      </div>
+    </div>
+    <div class="row bg-light p-3 mt-3">
+      <div class="col-lg-4">
+          <div class="image-container">
+              <img src="{% static 'Armstrong_App/images/mathsssss.png' %}" class="img-fluid" alt="Image 4">
+          </div>
+      </div>
+      <div class="col-lg-4">
+          <div class="image-container">
+              <img src="{% static 'Armstrong_App/images/calc.jpg' %}" class="img-fluid" alt="Image 5">
+          </div>
+      </div>
+      <div class="col-lg-4">
+          <div class="image-container">
+              <img src="{% static 'Armstrong_App/images/yellow.avif' %}" class="img-fluid" alt="Image 6">
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% comment %} Footer File Inclusion {% endcomment %}
+{% include 'Armstrong_App/footer.html' %}
+
+
+   
 </body>
 </html>

@@ -1,3 +1,4 @@
+{% comment %} Code for Updating User Profile {% endcomment %}
 {% if profile %}
 <h2>{{profile.user.username}}'s Profile</h2>
 <form method="post" action="{% url 'update_profile' %}">

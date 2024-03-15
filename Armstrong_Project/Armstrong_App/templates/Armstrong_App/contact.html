@@ -1,0 +1,58 @@
+<!-- Feeback Form File-->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        #submit_button{
+            background-color: #B997B7;
+            color: #fff;
+            border: none;
+        }
+        #submit_button:hover {
+            background: #F2AAb8;
+            color: black
+        }
+        </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Armstrong App</title>
+    <!-- Link to Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'Armstrong_App/css/styles.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Navbar Included-->
+    {% include 'Armstrong_App/navbar.html' %}
+
+    <!-- Contact Page Content -->
+    <div class="container mt-5">
+        <h2>We love to hear from you</h2>
+        <p>For any inquiries and feedback, please feel free to contact us using the form below:</p>
+        <form method="post">
+            {% csrf_token %}
+            {% comment %} Feedback Form {% endcomment %}
+            <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+            </div>
+            {% comment %} Submit Button {% endcomment %}
+            <button type="submit" class="btn btn-primary" id = "submit_button">Submit</button>
+        </form>
+    </div>
+    
+    {% comment %} Include Footer File {% endcomment %}
+    {% include 'Armstrong_App/footer.html' %}
+
+   
+</body>
+</html>

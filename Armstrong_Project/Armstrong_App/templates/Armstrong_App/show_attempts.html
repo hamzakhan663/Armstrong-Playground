@@ -1,6 +1,6 @@
 {% load static %}
 
-
+{% comment %} Css Styles for showing user attempts {% endcomment %}
 {% block content %}
   <style>
     .centered-container {
@@ -33,6 +33,7 @@
     }
   </style>
 
+  {% comment %} Code to show Tabulated User Attempts {% endcomment %}
   <div class="centered-container">
     <h2>{{user.username}}'s Attempts</h2>
     {% if user_attempts %}

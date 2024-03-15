@@ -1,13 +1,17 @@
 {% block content %}
 {% load static%}
-<link rel="stylesheet" type="text/css" href="{% static 'Armstrong_App/css/styles.css' %}">
 
+
+
+{% comment %} Css File Link {% endcomment %}
+<link rel="stylesheet" type="text/css" href="{% static 'Armstrong_App/css/styles.css' %}">
   <div class="search-container">
     <h2 class="top">Armstrong Number Search</h2>
 
     <form method="post" action="{% url 'search' %}" id="armstrongSearchForm">
       {% csrf_token %}
       
+      {% comment %} Form for User Search Range Input {% endcomment %}
       <label for="rangeInput">Search Range:</label>
       <input type="radio" id="rangeInput" name="inputType" value="range" checked>
       <input type="number" id="minNumber" name="minNumber" placeholder="Min">
@@ -15,17 +19,19 @@
 
       <br><br>
 
+      {% comment %} Form for User Single Number Input {% endcomment %}
       <label for="singleInput">Check Single Number:</label>
       <input type="radio" id="singleInput" name="inputType" value="single">
       <input type="number" id="singleNumber" name="singleNumber" placeholder="Enter a Number">
 
       <br><br>
-
+      {% comment %} Buttons for Armstrong App Functions {% endcomment %}
       <button type="submit" class="search-btn">Search</button>
       <input type="reset" value="Clear" onclick="clearResults()" class="clear-btn">
       <a href="{% url 'show_attempts' %}"><button type="button" class="attempts-btn">Show Attempts</button></a>
     </form>
     
+    {% comment %} Code for showing app results {% endcomment %}
     <div id="resultContainer">
       {% if result %}
         {% if result.input_type == 'range' %}
@@ -52,13 +58,19 @@
     </div>
   </div>
 
+  {% comment %} Javascript Code for resetting form content {% endcomment %}
   <script>
     function clearResults() {
       document.getElementById("armstrongSearchForm").reset();
       document.getElementById("resultContainer").style.display = "none";
     }
   </script>
+
+  {% comment %} Back to Home Button {% endcomment %}
 <div class="wrapped">
   <a href="{% url 'home' %}"><button type="button" class="back-btn">Go Back to Home</button></a>
 </div>
+
+
+
 {% endblock %}

@@ -1,6 +1,6 @@
 body {
     background-color: #f8f9fa;
-    /* padding-top: 56px; Adjust based on your navbar height */
+    
 }
 
 .landing {
@@ -16,11 +16,6 @@ body {
 .landing p {
 font-weight: 300;
 }
-
-/* #dropdown-content{
-    width: 100%;
-    position: relative;
-}    */
 
 .btn-custom {
     background-color: #B997B7;
@@ -39,6 +34,7 @@ font-weight: 300;
     background-color: #f4f4f4;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  
   }
 
   .top {
@@ -95,5 +91,14 @@ font-weight: 300;
 .wrapped{
 text-align: center;
 margin-top: 20px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  z-index: 1000;
+  max-height: calc(100vh - 100px); 
+  overflow-y: auto;
 }
 

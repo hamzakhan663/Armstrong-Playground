@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     return render(request,'Armstrong_App/home.html', {'user': request.user})
 
+#Register View
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -23,6 +24,7 @@ def register(request):
         form = RegisterForm()
     return render(request, 'Armstrong_App/register.html',{'form': form})
 
+#Login View
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -43,11 +45,12 @@ def user_login(request):
         form = LoginForm()
         return render(request, 'Armstrong_App/user_login.html', {'form': form})
 
-
+#Logout View
 def user_logout(request):
     logout(request)
     return redirect('home')
 
+#View for updating profile
 def update_profile(request):
     user_obj = User.objects.get(id=request.user.id)
 
@@ -70,7 +73,7 @@ def update_profile(request):
         return render(request, 'Armstrong_App/update_profile.html',context)
 
 
-
+#View for creating profile
 def create_profile(request):
     user_obj = User.objects.get(id=request.user.id)
 
@@ -101,7 +104,7 @@ def create_profile(request):
         }
         return render(request, 'Armstrong_App/create_profile.html',context)
 
-
+#Profile for deleting profile
 def delete_profile(request):
     user_obj = User.objects.get(id=request.user.id)
 
@@ -157,7 +160,7 @@ def search(request):
             result = {'error': 'Invalid input type'}
             
         UserAttempt.objects.create(
-            user=request.user,  # Assuming you have a user associated with the request
+            user=request.user,
             attempt_type=input_type,
             attempt_value=result['attempt_value'],
             result=result['formatted_result'],
@@ -180,8 +183,8 @@ def show_attempts(request):
        
     return render(request, 'Armstrong_App/show_attempts.html', {'user_attempts': user_attempts})
 
-
-
+def contact_page(request):
+    return render(request, 'Armstrong_App/contact.html', {'contact_page': True})
 
 
 
